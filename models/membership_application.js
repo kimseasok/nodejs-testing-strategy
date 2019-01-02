@@ -33,6 +33,24 @@ var MembershipApplication = function (args) {
         return this.first && this.last;
     }
 
+    this.validationMessage = function() {
+        if (this.isValid()) {
+            return 'Applicaton is valid';
+        } else if (!this.emailIsValid()) {
+            return 'Email is invalid';
+        } else if (!this.ageIsValid()) {
+            return 'Age is outside limits of 15 and 100 years';
+        } else if (!this.heightIsValid()) {
+            return 'Height is outside limits of 60 and 70 inches'
+        } else if (!this.weightIsValid()) {
+            return 'Weight is outside limits of 100 and 300 pounds';
+        } else if (!this.nameIsValid()) {
+            return 'First and last name are required';
+        } else if (!this.expired()) {
+            return 'Application is expired';
+        }
+    }
+
     this.isValid = function () {
         return this.emailIsValid() &&
             this.heightIsValid() &&
