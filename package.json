@@ -20,8 +20,8 @@
     "url": "git+https://github.com/kimseasok/nodejs-testing-strategy-.git"
   },
   "keywords": [
-    "\"nodejs",
-    "unit-test\""
+    "nodejs",
+    "unit-test"
   ],
   "bugs": {
     "url": "https://github.com/kimseasok/nodejs-testing-strategy-/issues"

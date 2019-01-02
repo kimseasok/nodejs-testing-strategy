@@ -1,7 +1,7 @@
 var assert = require('assert');
 var MemershipApplication = require('../models/membership_application');
 
-describe('Applying for mission', function() {
+describe('Membership application requirements', function() {
     var validApp;
 
     before(function(){
@@ -15,24 +15,68 @@ describe('Applying for mission', function() {
         });
     });
 
-    describe('Using valid email, first, last, height, age, weight', function() {
-        it('is valid', function() {
+    describe('Application valid if...', function() {
+        it('Application is valid if all validators return true', function() {
             assert(validApp.isValid(), 'Not valid');
         });
-        it('reports a valid email', function(){
+        it('Email constains 4 or more charactors and an @', function(){
             assert(validApp.emailIsValid())
         });
-        it('reports valid height', function() {
+        it('Height is between 60 and 75 inches', function() {
             assert(validApp.heightIsValid());
         });
-        it('reports valid age', function() {
+        it('Age is between 15 and 100', function() {
             assert(validApp.ageIsValid());
         });
-        it('reports valid wieght', function() {
+        it('Weight is between 100 and 300', function() {
             assert(validApp.weightIsValid());
         });
-        it('reports valid name', function() {
+        it('First and last name are provided', function() {
             assert(validApp.nameIsValid());
         });
+    });
+
+    describe('Application invalid if...', function() {
+        it('email is 4 characters or less', function() {
+            var app = new MemershipApplication({email: 'dd'});
+            assert(!app.emailIsValid());
+        });
+        it('email does not contain @', function() {
+            var app = new MemershipApplication({email: 'ddhell:test.com'});
+            assert(!app.emailIsValid());
+        });
+        it('Height is less 60', function() {
+            var app = new MemershipApplication({height: 40});
+            assert(!app.heightIsValid());
+        });
+        it('Height is more than 80', function() {
+            var app = new MemershipApplication({height: 80});
+            assert(!app.heightIsValid());
+        });
+        it('Age is less than 15', function() {
+            var app = new MemershipApplication({age: 10});
+            assert(!app.ageIsValid());
+        });
+        it('Age is more than 100', function() {
+            var app = new MemershipApplication({age: 150});
+            assert(!app.ageIsValid());
+        });
+        it('Weight is less than 100', function() {
+            var app = new MemershipApplication({weight: 90});
+            assert(!app.weightIsValid());
+        });
+        it('Weight is more than 300', function() {
+            var app = new MemershipApplication({weight: 301});
+            assert(!app.weightIsValid());
+        });
+        it('first is omitted', function() {
+            var app = new MemershipApplication();
+            assert(!app.nameIsValid());
+        });
+        it('last is omitted', function() {
+            var app = new MemershipApplication();
+            assert(!app.nameIsValid());
+        });
+
     });
 });
