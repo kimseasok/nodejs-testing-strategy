@@ -9,6 +9,7 @@
   "author": "Kimsea Sok",
   "license": "MIT",
   "dependencies": {
+    "moment": "^2.23.0",
     "underscore": "^1.9.1"
   },
   "directories": {
