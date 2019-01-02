@@ -1,0 +1,30 @@
+{
+  "name": "nodejs-testing-strategy",
+  "version": "1.0.0",
+  "description": "The subscription module for Reket Shop",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Kimsea Sok",
+  "license": "MIT",
+  "dependencies": {
+    "underscore": "^1.9.1"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kimseasok/nodejs-testing-strategy-.git"
+  },
+  "keywords": [
+    "\"nodejs",
+    "unit-test\""
+  ],
+  "bugs": {
+    "url": "https://github.com/kimseasok/nodejs-testing-strategy-/issues"
+  },
+  "homepage": "https://github.com/kimseasok/nodejs-testing-strategy-#readme"
+}
