@@ -18,14 +18,14 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kimseasok/nodejs-testing-strategy-.git"
+    "url": "git+https://github.com/kimseasok/nodejs-testing-strategy.git"
   },
   "keywords": [
     "nodejs",
     "unit-test"
   ],
   "bugs": {
-    "url": "https://github.com/kimseasok/nodejs-testing-strategy-/issues"
+    "url": "https://github.com/kimseasok/nodejs-testing-strategy/issues"
   },
-  "homepage": "https://github.com/kimseasok/nodejs-testing-strategy-#readme"
+  "homepage": "https://github.com/kimseasok/nodejs-testing-strategy#readme"
 }
