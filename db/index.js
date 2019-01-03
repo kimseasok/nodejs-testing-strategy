@@ -1,7 +1,7 @@
-exports.find = function(args, next) {};
+exports.getMissionByLaunchDate = function (launchDate, next) {
 
-exports.insert = function(args, next){};
+};
 
-exports.update = function(args, next) {};
+exports.createNextMission = function (args, next) {
 
-exports.destroy = function(args, next) {};
+};

@@ -16,7 +16,7 @@ MissionControl.prototype.currentMission = function (next) {
 
     var self = this;
 
-    this.db.find({ launchDate: formattedMissionDate }, function (err, foundMission) {
+    this.db.getMissionByLaunchDate(formattedMissionDate, function (err, foundMission) {
 
         //no bubbling here, throw
 
@@ -26,18 +26,18 @@ MissionControl.prototype.currentMission = function (next) {
             next(null, new Mission(foundMission));
         } else {
             foundMission = new Mission();
-            self.db.insert(foundMission, function (err, result) {
+            self.db.createNextMission(foundMission, function (err, result) {
                 next(err, foundMission);
             });
         }
     });
-}
+};
 
 MissionControl.prototype.hasSpaceForRole = function (role, next) {
     this.currentMission(function (err, mission) {
         var hasRoom = mission.needRole(role);
         next(null, hasRoom);
-    })
+    });
 };
 
 MissionControl.prototype.assignRole = function (application, next) {

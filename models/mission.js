@@ -1,5 +1,6 @@
 var moment = require('moment');
 var assert = require('assert');
+var _ = require('underscore');
 
 var Mission = function (args) {
     args = args || {};
@@ -19,7 +20,7 @@ var Mission = function (args) {
     mission.needRole = function (role) {
         var needed = false;
 
-        if (this.isFlying()) {
+        if (!this.isFlying()) {
             return false;
         }
 
