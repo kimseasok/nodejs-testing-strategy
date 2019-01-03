@@ -9,6 +9,7 @@
   "author": "Kimsea Sok",
   "license": "MIT",
   "dependencies": {
+    "async": "^2.6.1",
     "moment": "^2.23.0",
     "underscore": "^1.9.1"
   },
@@ -16,7 +17,7 @@
     "test": "test"
   },
   "devDependencies": {
-    "sinon": "^1.12.2"
+    "sinon": "^1.17.7"
   },
   "repository": {
     "type": "git",

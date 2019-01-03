@@ -9,26 +9,21 @@ describe('The review process', function () {
 
         var validApp = new MembershipApplication({
             first: 'Test',
-            last: 'User',
+            last: 'Account',
             email: 'test@test.com',
             age: 30,
             height: 66,
             weight: 299
         });
 
-        var review = new ReviewProcess();
-
-        var validationSyp = sinon.spy();
-        var missionSpy = sinon.spy();
-        var roleAvailableSpy = sinon.spy();
-        var roleCompatibleSpy = sinon.spy();
+        var review = new ReviewProcess({ application: validApp });
+        sinon.spy(review, 'ensureAppValid');
+        sinon.spy(review, 'findNextMission');
+        sinon.spy(review, 'roleIsAvailable');
+        sinon.spy(review, 'ensureRoleCompatible');
 
         before(function (done) {
-            review.on('validated', validationSyp);
-            review.on('mission-selected', missionSpy);
-            review.on('role-available', roleAvailableSpy);
-            review.on('role-compatible', roleCompatibleSpy);
-            review.processApplication(validApp, function (err, result) {
+            review.processApplication(function (err, result) {
                 decision = result;
                 done();
             });
@@ -39,16 +34,16 @@ describe('The review process', function () {
         });
 
         it('Ensure the application is valid', function () {
-            assert(validationSyp.called);
+            assert(review.ensureAppValid.called);
         });
         it('select a mission', function () {
-            assert(missionSpy.called);
+            assert(review.findNextMission.called);
         });
         it('ensure a role exists', function () {
-            assert(roleAvailableSpy.called);
+            assert(review.roleIsAvailable.called);
         });
         it('ensure role is compatible', function () {
-            assert(roleCompatibleSpy.called);
+            assert(review.ensureRoleCompatible.called);
         });
     });
 });

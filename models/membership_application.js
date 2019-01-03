@@ -55,7 +55,7 @@ var MembershipApplication = function (args) {
         return this.emailIsValid() &&
             this.heightIsValid() &&
             this.ageIsValid() &&
-            this.weightIsValid(),
+            this.weightIsValid() &&
             this.nameIsValid();
     };
 
