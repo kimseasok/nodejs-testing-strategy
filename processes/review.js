@@ -7,7 +7,7 @@ var ReviewProcess = function(args) {
     // make sure the app is valid
 
     this.ensureAppValid = function(app) {
-        if (app.isValid) {
+        if (app.isValid()) {
             this.emit('validated', app);
         } else {
             this.emit('invalid', app.validationMessage());
@@ -67,6 +67,7 @@ var ReviewProcess = function(args) {
     this.processApplication = function(app, next) {
         callback = next;
         this.emit('application-received', app);
+        
         
     };
 

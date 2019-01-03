@@ -15,7 +15,9 @@
   "directories": {
     "test": "test"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "sinon": "^1.12.2"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kimseasok/nodejs-testing-strategy.git"
