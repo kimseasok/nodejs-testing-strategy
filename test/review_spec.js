@@ -1,20 +1,13 @@
 var assert = require('assert');
 var ReviewProcess = require('../processes/review');
-var MembershipApplication = require('../models/membership_application');
+var Helpers = require('./helpers');
 var sinon = require('sinon');
 
 describe('The review process', function () {
     describe('Receiving a valid application', function () {
         var decision;
 
-        var validApp = new MembershipApplication({
-            first: 'Test',
-            last: 'Account',
-            email: 'test@test.com',
-            age: 30,
-            height: 66,
-            weight: 299
-        });
+        var validApp = Helpers.validApplication;
 
         var review = new ReviewProcess({ application: validApp });
         sinon.spy(review, 'ensureAppValid');

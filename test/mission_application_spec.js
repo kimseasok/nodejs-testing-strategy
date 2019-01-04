@@ -1,18 +1,12 @@
 var assert = require('assert');
 var MemershipApplication = require('../models/membership_application');
+var Helpers = require('./helpers');
 
 describe('Membership application requirements', function() {
     var validApp;
 
     before(function(){
-        validApp = new MemershipApplication({
-            first: 'Test',
-            last: 'User',
-            email: 'test@test.com',
-            age: 30,
-            height: 66,
-            weight: 180
-        });
+        validApp = Helpers.validApplication;
     });
 
     describe('Application valid if...', function() {
