@@ -11,6 +11,7 @@ var Mission = function (args) {
         MAVpilot: args.MAVpilot || null,
         colonists: args.colonists || [],
         tourists: args.tourists || [],
+        assignments: [],
 
         //default to the next month on first
 

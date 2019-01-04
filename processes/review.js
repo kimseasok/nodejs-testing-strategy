@@ -1,13 +1,18 @@
 var async = require('async');
 var assert = require('assert');
+var MissionControl = require('../models/mission_control');
 
 var ReviewProcess = function (args) {
 
     assert(args.application, 'Need an application to review');
+    assert(args.db, 'Need a database instance');
 
     var app = args.application;
+    var db = args.db;
     // make sure the app is valid
-    
+
+    var missionControl = new MissionControl({ db: db });
+
     this.ensureAppValid = function (next) {
         if (app.isValid()) {
             next(null, true);
@@ -68,7 +73,7 @@ var ReviewProcess = function (args) {
                     message: err
                 });
             } else {
-                
+
                 result.message = 'Welcome to the Mars';
                 next(null, result);
             }

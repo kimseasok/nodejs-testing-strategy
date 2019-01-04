@@ -2,15 +2,18 @@ var mement = require('moment');
 var Mission = require('../models/mission');
 var MissionControl = require('../models/mission_control');
 var assert = require('assert');
-var db = require('../db');
+var DB = require('../db');
 var sinon = require('sinon');
-
-sinon.stub(db, 'getMissionByLaunchDate').yields(null, null);
-sinon.stub(db, 'createNextMission').yields(null, new Mission({id: 1000}));
-
-var missionControl = new MissionControl({ db: db });
+var Helper = require('./helpers');
 
 describe('Mission Planning', function () {
+    var missionControl, db;
+    
+    before(function () {
+        db = Helper.stubDb();
+        missionControl = new MissionControl({ db: db });
+    });
+
     describe('No current mission', function () {
         var currentMission;
         before(function (done) {
@@ -30,6 +33,7 @@ describe('Mission Planning', function () {
     describe('Current mission exists', function () {
         var currentMission;
         before(function (done) {
+            
             db.getMissionByLaunchDate.restore();
             sinon.stub(db, 'getMissionByLaunchDate').yields(null, { id: 1000 });
             missionControl.currentMission(function (err, res) {

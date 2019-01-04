@@ -1,21 +1,22 @@
 var assert = require('assert');
+var Mission = require('../models/mission');
 var ReviewProcess = require('../processes/review');
 var Helpers = require('./helpers');
 var sinon = require('sinon');
+var DB = require('../db');
 
 describe('The review process', function () {
     describe('Receiving a valid application', function () {
-        var decision;
-
-        var validApp = Helpers.validApplication;
-
-        var review = new ReviewProcess({ application: validApp });
-        sinon.spy(review, 'ensureAppValid');
-        sinon.spy(review, 'findNextMission');
-        sinon.spy(review, 'roleIsAvailable');
-        sinon.spy(review, 'ensureRoleCompatible');
+        var decision, review, validApp = Helpers.validApplication;
 
         before(function (done) {
+            var db = Helpers.stubDb();
+            review = new ReviewProcess({ application: validApp, db: db });
+                sinon.spy(review, 'ensureAppValid');
+                sinon.spy(review, 'findNextMission');
+                sinon.spy(review, 'roleIsAvailable');
+                sinon.spy(review, 'ensureRoleCompatible');
+
             review.processApplication(function (err, result) {
                 decision = result;
                 done();
