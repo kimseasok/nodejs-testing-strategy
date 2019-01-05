@@ -43,6 +43,28 @@ var Mission = function (args) {
         return needed;
     };
 
+    mission.passengers = function () {
+        return (mission.colonists.length + mission.tourists.length) || [];
+    };
+
+    mission.passengersAndCrew = function () {
+        return mission.passengers.length + 2;
+    };
+
+    mission.hasRoom = function () {
+        return mission.passengersAndCrew < 10;
+    };
+
+    mission.totalWeight = function () {
+        var weight = 0;
+
+        _.each(mission.assignments, function(assignment) {
+            weight += assignment.passenger.weight;
+        });
+
+        return weight;
+    }
+
     mission.assignRole = function (args) {
         assert.ok(args.user && args.role, 'Need a user and role in order to assign');
 

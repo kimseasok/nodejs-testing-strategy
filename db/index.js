@@ -8,6 +8,10 @@ var DB = function (args) {
 
     };
 
+    this.saveAssignment = function(args, next) {
+
+    }
+
 };
 
 module.exports = DB;

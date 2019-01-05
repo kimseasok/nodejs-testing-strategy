@@ -1,13 +1,14 @@
 var async = require('async');
 var assert = require('assert');
 var MissionControl = require('../models/mission_control');
+var Assignment = require('../models/assignment');
 
 var ReviewProcess = function (args) {
 
     assert(args.application, 'Need an application to review');
     assert(args.db, 'Need a database instance');
 
-    var app = args.application;
+    var assignment, mission, app = args.application;
     var db = args.db;
     // make sure the app is valid
 
@@ -24,38 +25,45 @@ var ReviewProcess = function (args) {
     // find the next mission
 
     this.findNextMission = function (next) {
-        mission = {
-            commander: null,
-            pilot: null,
-            MAVPilot: null,
-            passengers: []
+        // grab current mission from mission control
 
-        };
-
-        next(null, mission);
+        missionControl.currentMission(function (err, res) {
+            if (err) {
+                next(err, null);
+            } else {
+                mission = res;
+                next(null, res);
+            }
+        });
     };
     // make sure selected is available
 
     this.roleIsAvailable = function (next) {
-
-        // we have no  concept of the role selection just yet
-
-        //TODO: What about a role? Need more info
-
-        next(null, true);
+        missionControl.hasSpaceForRole(app.role, next);
     };
 
     // make sure height/weight/age is  right for role
 
     this.ensureRoleCompatible = function (next) {
-        // TODO: find out about the role and height/weight/age
+        assignment = new Assignment({
+            passenger: app,
+            mission: mission,
+            role: app.role
+        });
 
-        next(null, true);
+        next(null, assignment.passengerIsCompatible);
     };
 
     this.approveAppliction = function (next) {
-        next(null, true);
-    }
+        db.saveAssignment({ assignment: assignment }, next);
+        //    next(null, true);
+    };
+
+    // this.startSubscription = function(next) {
+    //     // return a subscription
+
+
+    // }
 
     // accept the app with a message
 

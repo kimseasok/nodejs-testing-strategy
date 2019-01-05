@@ -4,12 +4,14 @@ var sinon = require('sinon');
 var DB = require('../../db');
 
 exports.validApplication = new MembershipApplication({
-    first: 'Test',
-    last: 'Account',
-    email: 'test@test.com',
-    age: 30,
-    height: 66,
-    weight: 299
+    first : "Test",
+    last : "User",
+    email : "test@test.com",
+    age : 30,
+    height : 66,
+    weight : 180,
+    role : "commander",
+    card : 1
 });
 
 exports.stubDb = function (args) {
@@ -18,7 +20,8 @@ exports.stubDb = function (args) {
     var db = new DB();
 
     sinon.stub(db, 'getMissionByLaunchDate').yields(null, null);
-    sinon.stub(db, 'createNextMission').yields(null, new Mission(mission));
+    sinon.stub(db, 'createNextMission').yields(null, mission);
+    //sinon.stub(db, 'saveAssignment').yields(null, new Mission(mission));
 
     return db;
 };

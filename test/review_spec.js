@@ -11,11 +11,12 @@ describe('The review process', function () {
 
         before(function (done) {
             var db = Helpers.stubDb();
+            sinon.stub(db, 'saveAssignment').yields(null, { save: true });
             review = new ReviewProcess({ application: validApp, db: db });
-                sinon.spy(review, 'ensureAppValid');
-                sinon.spy(review, 'findNextMission');
-                sinon.spy(review, 'roleIsAvailable');
-                sinon.spy(review, 'ensureRoleCompatible');
+            sinon.spy(review, 'ensureAppValid');
+            sinon.spy(review, 'findNextMission');
+            sinon.spy(review, 'roleIsAvailable');
+            sinon.spy(review, 'ensureRoleCompatible');
 
             review.processApplication(function (err, result) {
                 decision = result;
